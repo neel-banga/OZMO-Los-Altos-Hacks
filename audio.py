@@ -1,11 +1,11 @@
-import pyttsx3
 import speech_recognition as sr
+from gtts import gTTS
+from playsound import playsound
 
 def say(words):
-    engine = pyttsx3.init()
-    engine.say(words)
-    engine.runAndWait()
-
+    tts = gTTS(text=words, lang='en')
+    tts.save("output.mp3")
+    playsound("output.mp3")
 
 def listen():
     r = sr.Recognizer()

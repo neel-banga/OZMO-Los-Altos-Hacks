@@ -1,44 +1,72 @@
 from sklearn.linear_model import LogisticRegression
 import numpy as np
+import random
 
-# Adjust DATA for NLP
-
-# Define the data and labels
 data = [
-  ["I want to add", 1],
-  ["addition please", 1],
-  ["let me plus something", 1],
-  ["sum these numbers", 1],
-  ["total of", 1],
-  ["add these up", 1],
-  ["combine these values", 1],
-  ["add the following", 1],
-  ["add these numbers together", 1],
-  ["find the sum of these numbers", 1],
-  ["what's the total of these numbers", 1],
-  ["please add these numbers", 1],
-  ["I need to subtract", 2],
-  ["minus", 2],
-  ["take away from", 2],
-  ["subtract these values", 2],
-  ["remove this number from", 2],
-  ["subtract this from that", 2],
-  ["what's the difference between these numbers", 2],
-  ["please subtract these numbers", 2],
-  ["find the result of subtracting these numbers", 2],
-  ["I want multiplication", 3],
-  ["times please", 3],
-  ["multiply by", 3],
-  ["what's the product of", 3],
-  ["calculate the product of", 3],
-  ["multiply these values", 3],
-  ["double this number", 3],
-  ["triple this number", 3],
-  ["quadruple this number", 3],
-  ["multiply these numbers together", 3],
-  ["find the result of multiplying these numbers", 3],
-  ["please multiply these numbers", 3]
-]
+    ["Let me send a text to confirm the plans.", 0],
+    ["Send an email to John asking him to call me.", 0],
+    ["Read my latest emails.", 0],
+    ["Text mom and ask her to pick me up.", 0],
+    ["Read my unread messages on WhatsApp.", 0],
+    ["Can you draft an email to my boss about the meeting?", 0],
+    ["Send a WhatsApp message to Jane saying I'll be late.", 0],
+    ["Compose a text to Mike reminding him about the party.", 0],
+    ["Email my friend Sarah about the upcoming trip.", 0],
+    ["Send a message to my coworker about the project deadline.", 0],
+    ["Please send a text to my friend using the AI assistant.", 0],
+    ["Let me email my colleague using the AI personal assistant.", 0],
+    ["Text my family using the AI chatbot.", 0],
+    ["Send a message to my friend using the virtual assistant.", 0],
+    ["Compose an email to my client with the help of the AI bot.", 0],
+    ["Read my text messages using the AI-powered assistant.", 0],
+    ["Draft an email to my team using the virtual assistant.", 0],
+    ["Ask the AI chatbot to send a text to my coworker.", 0],
+    ["Send a message to my friend via the AI messaging assistant.", 0],
+    ["What's around me? Describe my surroundings.", 1],
+    ["Describe the scene in front of me.", 1],
+    ["Identify the objects around me.", 1],
+    ["Describe the people around me.", 1],
+    ["What's the weather like right now?", 1],
+    ["Read the labels on the nearby items.", 1],
+    ["Tell me about the landmarks around me.", 1],
+    ["Can you read the street signs nearby?", 1],
+    ["Are there any obstacles in my path?", 1],
+    ["Please describe the environment around me using the AI assistant.", 1],
+    ["Ask the virtual assistant to identify objects around me.", 1],
+    ["Describe the scene using the AI-powered chatbot.", 1],
+    ["What's the weather like right now according to the AI bot?", 1],
+    ["Read the labels on the nearby items with the help of the virtual assistant.", 1],
+    ["Describe the people around me using the AI chatbot.", 1],
+    ["Ask the virtual assistant to read the street signs nearby.", 1],
+    ["Check for obstacles in my path using the AI personal assistant.", 1],
+    ["Is there someone I know near me?", 2],
+    ["Is my friend Sarah nearby?", 2],
+    ["Can you check if my friend Tom is close?", 2],
+    ["Find my friend's location on the map.", 2],
+    ["Alert me when my friend arrives.", 2],
+    ["Notify me if my friend is within 100 meters.", 2],
+    ["Help me locate my friend in a crowded place.", 2],
+    ["Can you tell me if my friend is on the same street?", 2],
+    ["Detect if my friend is in the same room.", 2],
+    ["Is my friend John nearby according to the AI assistant?", 2],
+    ["Ask the virtual assistant to check if my friend is close.", 2],
+    ["Find my friend's location on the map with the help of the AI bot.", 2],
+    ["Alert me when my friend arrives using the AI-powered personal assistant.", 2],
+    ["Notify me if my friend is within 100 meters using the virtual assistant.", 2],
+    ["Help me locate my friend in a crowded place with the AI chatbot.", 2],
+    ["Can you tell me if my friend is on the same street using the AI assistant?", 2],
+    ["Detect if my friend is in the same room using the virtual assistant.", 2],
+    ["Is my friend Jane nearby according to the AI bot?", 2],
+    ["Ask the virtual assistant to check if my friend Tom is close.", 2],
+    ["Find my friend's location on the map with the help of the AI personal assistant.", 2],
+    ["Alert me when my friend Sarah arrives using the AI-powered chatbot.", 2],
+    ["Notify me if my friend John is within 100 meters using the virtual assistant.", 2],
+    ["Help me locate my friend in a crowded place using the AI chatbot.", 2],
+    ["Can you tell me if my friend is on the same street according to the AI assistant?", 2],
+    ["Detect if my friend is in the same room using the AI bot.", 2],
+    ]
+
+random.shuffle(data)
 
 sentences = [d[0] for d in data]
 labels = [d[1] for d in data]
@@ -85,8 +113,4 @@ def classify_input(input_text):
     prediction = model.predict(X_test)
     return prediction[0]
 
-print(classify_input("let's add these numbers"))
-
-print(classify_input("subtract this value"))
-
-print(classify_input("multiply these values"))
+print(classify_input("are one of my friends near me?"))
