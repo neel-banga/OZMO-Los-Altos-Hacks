@@ -4,47 +4,55 @@ import numpy as np
 import time
 import audio
 
-# Model
-model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
 
-start_time = time.time()
+def yolo():
+    # Model
+    model = torch.hub.load('ultralytics/yolov5', 'yolov5s', pretrained=True)
 
-audio.say('DETECTING OBJECTS...')
+    start_time = time.time()
 
-# Open the video capture device (webcam)
-lst = []
-cap = cv2.VideoCapture(0)
-while time.time() - start_time < 10:
-    ret, frame = cap.read()
+    audio.say('I CAN SEE A...')
 
-    # Make detections
-    results = model(frame)
-    cv2.imshow('YOLO', np.squeeze(results.render())) 
+    # Open the video capture device (webcam)
+    lst = []
+    cap = cv2.VideoCapture(0)
+    while time.time() - start_time < 20:
+        ret, frame = cap.read()
 
-    df = results.pandas().xyxy[0]
+        # Make detections
+        results = model(frame)
+        cv2.imshow('YOLO', np.squeeze(results.render()))
 
-    for i in df['name']:
-        if i not in lst:
-            #lst.append(i)
-            new_label = i
-            time.sleep(2)
-            confidence = df['confidence'].max().item()
-            
-            print(new_label)
+        df = results.pandas().xyxy[0]
 
-            if confidence >= 0.3:
-                lst.append(new_label)
+        for i in df['name']:
+            if i not in lst:
+                lst.append(i)
+                new_label = i
+                time.sleep(2)
+                confidence = df[df['name'] == new_label]['confidence'].max().item()
 
-print(lst)
+                print(new_label)
 
-audio.say('I CAN SEE A')
+                if confidence >= 0.3:
+                    # Determine direction based on object's bounding box center
+                    bbox_center_x = (df[df['name'] == new_label]['xmax'].iloc[0] + df[df['name'] == new_label]['xmin'].iloc[0]) / 2
+                    bbox_center_y = (df[df['name'] == new_label]['ymax'].iloc[0] + df[df['name'] == new_label]['ymin'].iloc[0]) / 2
+                    frame_center_x = frame.shape[1] / 2
+                    frame_center_y = frame.shape[0] / 2
 
-for i in lst:
-    print(i)
-    audio.say(i)
+                    if bbox_center_x > frame_center_x:
+                        direction_x = "to your right"
+                    else:
+                        direction_x = "to your left"
 
-audio.say('NEAR YOU')
+                    if bbox_center_y < frame_center_y: # Flip the comparison for vertical direction
+                        direction_y = "above you" # Flip the direction description
+                    else:
+                        direction_y = "below you" # Flip the direction description
 
-cap.release()
+                    audio.say(f"{new_label} {direction_x} {direction_y}")
 
-cv2.destroyAllWindows()
+    cap.release()
+
+    cv2.destroyAllWindows()

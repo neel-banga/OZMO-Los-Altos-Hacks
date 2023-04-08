@@ -112,5 +112,3 @@ def classify_input(input_text):
     X_test = vectorizer.transform([input_text])
     prediction = model.predict(X_test)
     return prediction[0]
-
-print(classify_input("are one of my friends near me?"))
