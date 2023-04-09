@@ -1,41 +1,39 @@
 import NLP
 import yolo
-import CNN
+import face_det
 from audio import say
 from audio import listen
 import text
 import label_reading
+import call
+import face_det
+import sys
 
-say('POWERING UP!')
-'''
+say("powering on")
+
+
 while True:
     command = listen()
 
-    if 'somi' in command:
-        break'''
+    label = NLP.classify_input(command)
 
-command = listen()
+    print(label)
 
-print(command)
+    if label == 0:
+        text1 = "Hello Neel this is a test"
+        text.text(text1)
 
-label = NLP.classify_input(command)
+    elif label == 1:
+        yolo.yolo()
 
-print(label)
+    elif label == 2:
+        face_det.get_person()
 
-if label == 0:
-    say('What would you like to send')
-    text1 = listen()
-    text.text(text1)
+    elif label == 3:
+        call.call()
 
-elif label == 1:
-    yolo.yolo()
-
-elif label == 2:
-    pass
-    #CNN.CNN()
-
-elif label == 3:
-    pass
-
-elif label == 4:
-    label_reading.read_label()
+    elif label == 4:
+        label_reading.read_label()
+    
+    elif label == 5:
+        sys.exit()
