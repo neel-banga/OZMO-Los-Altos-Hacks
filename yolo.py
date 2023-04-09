@@ -16,7 +16,7 @@ def yolo():
     # Open the video capture device (webcam)
     lst = []
     cap = cv2.VideoCapture(0)
-    while time.time() - start_time < 20:
+    while time.time() - start_time < 10:
         ret, frame = cap.read()
 
         # Make detections
@@ -34,7 +34,7 @@ def yolo():
 
                 print(new_label)
 
-                if confidence >= 0.3:
+                if confidence >= 0.35:
                     # Determine direction based on object's bounding box center
                     bbox_center_x = (df[df['name'] == new_label]['xmax'].iloc[0] + df[df['name'] == new_label]['xmin'].iloc[0]) / 2
                     bbox_center_y = (df[df['name'] == new_label]['ymax'].iloc[0] + df[df['name'] == new_label]['ymin'].iloc[0]) / 2
