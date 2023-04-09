@@ -23,14 +23,19 @@ def read_label():
         
         if not ret:
             break
-            
-        text = read_text(frame)
-        
+
         cv2.imshow('Real-time', cap.read()[1])
 
-        if text != None:
-            audio.say(text)
+        try:    
+            text = read_text(frame)
+            
+            if text != None:
+                audio.say(text)
+                break
         
+        except:
+            pass
+
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
 
