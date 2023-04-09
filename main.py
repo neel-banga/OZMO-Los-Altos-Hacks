@@ -4,6 +4,7 @@ import CNN
 from audio import say
 from audio import listen
 import text
+import label_reading
 
 say('POWERING UP!')
 '''
@@ -32,3 +33,9 @@ elif label == 1:
 elif label == 2:
     pass
     #CNN.CNN()
+
+elif label == 3:
+    pass
+
+elif label == 4:
+    label_reading.read_label()

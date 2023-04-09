@@ -64,7 +64,26 @@ data = [
     ["Help me locate my friend in a crowded place using the AI chatbot.", 2],
     ["Can you tell me if my friend is on the same street according to the AI assistant?", 2],
     ["Detect if my friend is in the same room using the AI bot.", 2],
-    ]
+    ["Call my sister and wish her a happy birthday.", 3],
+    ["I need to call my friend Chris to discuss our travel plans.", 3],
+    ["Can you help me make a call to my doctor's office to schedule an appointment?", 3],
+    ["Call John and ask him to bring me some groceries on his way back.", 3],
+    ["I need to call the pharmacy to refill my prescription.", 3],
+    ["Can you help me call the restaurant to make a reservation for tonight?", 3],
+    ["Call Mom and let her know I arrived safely at my destination.", 3],
+    ["I need to call the bank to check my account balance.", 3],
+    ["Call my colleague and ask for an update on the project.", 3],
+    ["Can you help me call the customer service to inquire about my order?", 3],
+    ["Call my friend Lisa and ask her to read a news article to me.", 4],
+    ["Read the latest email from my boss and summarize it for me.", 4],
+    ["Can you read the text message from my friend Sarah and reply with a voice message.", 4],
+    ["I need to have the AI assistant read the directions to the nearest coffee shop.", 4],
+    ["Read the contents of this document to me and highlight important points.", 4],
+    ["Can you read the labels on this package and tell me what's inside?", 4],
+    ["Read the captions of the images in this photo album using the AI assistant.", 4],
+    ["I need to have the AI-powered chatbot read the ingredients list on this food package.", 4],
+    ["Read the news headlines and summarize the top stories for me.", 4]
+]
 
 random.shuffle(data)
 
