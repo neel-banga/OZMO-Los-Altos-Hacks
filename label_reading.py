@@ -18,7 +18,7 @@ def read_label():
 
     cap = cv2.VideoCapture(0)
 
-    while time.time() - start_time < 25:
+    while time.time() - start_time < 20:
         ret, frame = cap.read()
         
         if not ret:
