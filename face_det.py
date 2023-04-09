@@ -1,13 +1,14 @@
 import torch
 import os
-import random
 from PIL import Image
 import torchvision.transforms as transforms
-import pickle
 import torch.optim as optim
 import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
+import time
+import audio
+import cv2
 
 dir = 'CONV_DATA'
 
@@ -129,16 +130,54 @@ def train_model():
 
 #train_model()
 
-net = Model(480000, 48, 2)    
-net.load_state_dict(torch.load('model.pth'))
+def evaluate(image):
+    net = Model(480000, 48, 2)    
+    net.load_state_dict(torch.load('model.pth'))
 
-INDEX = 15
+    INDEX = 4
 
-path = image_paths[INDEX]
-image = Image.open(path)
-image.show()
-print(set_y[INDEX])
-net.eval()
-with torch.no_grad():
-    output = (net(set_x[INDEX])).tolist()
-    print(output)
+    image = Image.open(path)
+    resized_image = image.resize((400, 400))
+    resized_image = resized_image.convert("RGB")
+    resized_image.save(os.path.join('test.jpg'))
+    transform = transforms.ToTensor()
+    tensor = transform(resized_image)
+    tensor = tensor.view(480000)
+
+    net.eval()
+    with torch.no_grad():
+        output = (net(tensor)).tolist()
+        inx = output.index(max(output))
+        if inx == 0:
+            return('NEEL')
+        else:
+            return('VEDANT')
+
+#print(evaluate('Screen Shot 2023-04-08 at 11.56.19 PM.png'))
+
+def get_person():
+
+    cap = cv2.VideoCapture(0)
+
+    start_time = time.time()
+
+    while time.time() - start_time < 20:
+        ret, frame = cap.read()
+        
+        if not ret:
+            break
+        
+        time.sleep(2)
+
+        cv2.imwrite('frame.jpg', frame)
+
+        person = evaluate('frame.jpg')
+
+        break
+
+    cap.release()
+    cv2.destroyAllWindows()
+
+    audio.say(person)
+
+get_person()
