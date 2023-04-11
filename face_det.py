@@ -69,7 +69,6 @@ for i in image_paths:
     tensor = transform(Image.open(i))
     imgs.append(tensor)
 
-print(labels)
 
 set_y = []
 for i in labels:
@@ -180,4 +179,4 @@ def get_person():
 
     audio.say(person)
 
-get_person()
+#get_person()

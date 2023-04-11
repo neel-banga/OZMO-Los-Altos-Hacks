@@ -7,33 +7,25 @@ import text
 import label_reading
 import call
 import face_det
-import sys
 
-say("powering on")
+command = listen()
 
+label = NLP.classify_input(command)
 
-while True:
-    command = listen()
+print(label)
 
-    label = NLP.classify_input(command)
+if label == 0:
+    text1 = "Hello Neel this is a test"
+    text.text(text1)
 
-    print(label)
+elif label == 1:
+    yolo.yolo()
 
-    if label == 0:
-        text1 = "Hello Neel this is a test"
-        text.text(text1)
+elif label == 2:
+    face_det.get_person()
 
-    elif label == 1:
-        yolo.yolo()
+elif label == 3:
+    call.call()
 
-    elif label == 2:
-        face_det.get_person()
-
-    elif label == 3:
-        call.call()
-
-    elif label == 4:
-        label_reading.read_label()
-    
-    elif label == 5:
-        sys.exit()
+elif label == 4:
+    label_reading.read_label()
