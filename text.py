@@ -1,12 +1,9 @@
-import os
 from twilio.rest import Client
 from audio import listen
+from config import TWILIO_AUTH_TOKEN, TWILIO_ACCOUNT_SID
 
 def text(text):
-    # Set up the Twilio client
-    account_sid = os.environ['TWILIO_ACCOUNT_SID']
-    auth_token = os.environ['TWILIO_AUTH_TOKEN']
-    client = Client(account_sid, auth_token)
+    client = Client(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN)
 
     message = client.messages.create(
         to = '+19255776636',
