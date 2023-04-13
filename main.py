@@ -1,14 +1,14 @@
 import NLP
 import yolo
 import face_det
-from audio import say
 from audio import listen
 import text
 import label_reading
 import call
-import face_det
 
-command = listen()
+#command = listen()
+
+command = input()
 
 label = NLP.classify_input(command)
 

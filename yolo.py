@@ -12,11 +12,10 @@ def yolo():
     start_time = time.time()
 
     audio.say('I CAN SEE A...')
-
-    # Open the video capture device (webcam)
+    
     lst = []
     cap = cv2.VideoCapture(0)
-    while time.time() - start_time < 10:
+    while time.time() - start_time < 25:
         ret, frame = cap.read()
 
         # Make detections
@@ -51,7 +50,10 @@ def yolo():
                     else:
                         direction_y = "below you" # Flip the direction description
 
-                    audio.say(f"{new_label} {direction_x} {direction_y}")
+                    words = f'{new_label} {direction_x} {direction_y}'
+
+                    print(words)
+                    audio.say(words)
 
     cap.release()
 
