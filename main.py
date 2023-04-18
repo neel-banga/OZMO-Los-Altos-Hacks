@@ -6,9 +6,7 @@ import text
 import label_reading
 import call
 
-#command = listen()
-
-command = input()
+command = listen()
 
 label = NLP.classify_input(command)
 

@@ -100,5 +100,3 @@ def get_person():
     cv2.destroyAllWindows()
     print(person)
     audio.say(person)
-
-get_person()
