@@ -28,20 +28,18 @@ class Net(nn.Module):
             nn.Conv2d(32, 64, (5,5)),
             nn.ReLU(),
             nn.Conv2d(64, 64, (5,5)),
-            nn.ReLU()
+            nn.ReLU(),
+            nn.Flatten(),
+            nn.Linear(20736, 2)
         )
-        self.fc1 = nn.Linear(20736, 2)
-    
+
     def forward(self, x):
-        x = self.model(x)
-        x = torch.flatten(x, 1) # Flatten the tensor along second dimension
-        x = self.fc1(x)
-        return x
+        return self.model(x)
     
 net = Net()
 opt = torch.optim.Adam(net.parameters(), lr=1e-3)
 loss_fn = nn.CrossEntropyLoss()
-EPOCHS= 10
+EPOCHS= 15
 
 def train_model():
     for epoch in range(EPOCHS):
